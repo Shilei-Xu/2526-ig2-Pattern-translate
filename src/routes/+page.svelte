@@ -13,15 +13,27 @@
 	//import Pattern from '$lib/components/5_Dreieck.svelte';
 
 	/* 2格旋转- 4格旋转 */
+	//基础版本
 	//import Pattern from '$lib/components/6_Dreieck.svelte';	
 	//import Pattern from '$lib/components/6_Dreieck2.svelte';	
+	//四角中间，四角分开 - 灰色
 	//import Pattern from '$lib/components/6_Dreieck3.svelte';
 
 	/* 蓝色底，salmon色三角形,4格旋转，不同位置 */
 	//import Pattern from '$lib/components/6_Dreieck_farbe.svelte';	
 	//import Pattern from '$lib/components/6_Dreieck_farbe2.svelte';
-	import Pattern from '$lib/components/6_Dreieck_farbe3.svelte';
-	
+	//import Pattern from '$lib/components/6_Dreieck_farbe3.svelte';
+
+	/* 0111 新增UI控制 */
+	//老师例子
+	//import Pattern from '$lib/components/1_ui_pattern.svelte';
+	//四角中间，四角分开
+	//import Pattern from '$lib/components/7_Dreieck_ui.svelte';
+	//四角都中间
+	//import Pattern from '$lib/components/7_Dreieck_ui2.svelte';
+	//去掉随机颜色
+	import Pattern from '$lib/components/7_Dreieck_ui3.svelte';
+
 	import chroma from 'chroma-js';
 </script>
 
