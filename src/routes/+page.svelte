@@ -31,8 +31,12 @@
 	//import Pattern from '$lib/components/7_Dreieck_ui.svelte';
 	//四角都中间
 	//import Pattern from '$lib/components/7_Dreieck_ui2.svelte';
-	//去掉随机颜色
-	import Pattern from '$lib/components/7_Dreieck_ui3.svelte';
+	//去掉随机颜色,hartmut中心点
+	//import Pattern from '$lib/components/7_Dreieck_ui3.svelte';
+	//0113 中心点优化
+	//import Pattern from '$lib/components/7_Dreieck_ui4.svelte';
+	//0113 range优化
+	import Pattern from '$lib/components/7_Dreieck_ui5.svelte';
 
 	import chroma from 'chroma-js';
 </script>

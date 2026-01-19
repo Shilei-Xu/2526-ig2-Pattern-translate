@@ -10,28 +10,43 @@
 	let offset = $state(0);
 	let squareCount = $state(10);
 	let squareSize = $derived(1000 / squareCount);
-	let xm = $state(50);
+	/* let xm = $state(50);
 	let ym = $state(50);
 	let dx = $state(50);
-	let dy = $state(0);
+	let dy = $state(0); */
+
+	let xm_ratio = $state(0.5); // 0~1
+	let ym_ratio = $state(0.5); // 0~1
+	let dx_ratio = $state(0.5); // 0~1
+	let dy_ratio = $state(0); // -1~1
+
+	let tileCount = 50;
+
+	let xm =$derived(xm_ratio * squareSize);
+	let ym = $derived(ym_ratio * squareSize);
+	let dx = $derived(dx_ratio * squareSize);
+	let dy = $derived(dy_ratio * squareSize);
 
 	function getStep() {
 		return squareSize + offset;
 	}
 
 	function calculatePosition(xi, yi) {
-		const cx = squareCount;
-		const cy = squareCount;
 		const step = getStep();
+
+		// center offset
+		const cx = (tileCount - 1) / 2;
+		const cy = (tileCount - 1) / 2;
 
 		let x = (xi - cx) * step;
 		let y = (yi - cy) * step;
-		//console.log(xi, x);
 
 		// odd rows shift right
 		if (yi % 2 === 1) {
 			x += step;
 		}
+		// shift all left by half step to center pattern
+		x -= step / 2;
 
 		return { x, y };
 	}
@@ -53,17 +68,22 @@
 	<Slider min={0} max={250} bind:value={offset} label="Square Offset" />
 	<Slider min={3} max={50} bind:value={squareCount} label="Square Count" />
 
-	<Slider min={dy} max={squareSize - dy} step={1} bind:value={xm} label="Center X" />
+	<!-- <Slider min={dy} max={squareSize - dy} step={1} bind:value={xm} label="Center X" />
 	<Slider min={-dy} max={squareSize + dy} step={1} bind:value={ym} label="Center Y" />
 
 	<Slider min={0} max={squareSize} step={1} bind:value={dx} label="Distance X" />
-	<Slider min={-squareSize} max={squareSize} step={1} bind:value={dy} label="Distance Y" />
+	<Slider min={-squareSize} max={squareSize} step={1} bind:value={dy} label="Distance Y" /> -->
+
+	<Slider min={0} max={1} step={0.01} bind:value={xm_ratio} label="Center X" />
+	<Slider min={0} max={1} step={0.01} bind:value={ym_ratio} label="Center Y" />
+	<Slider min={0} max={1} step={0.01} bind:value={dx_ratio} label="Distance X" />
+	<Slider min={-0.5} max={0.5} step={0.01} bind:value={dy_ratio} label="Distance Y" />
 </div>
 
 <div class="svg-container">
 	<svg viewBox="-500 -500 1000 1000" class="svg-canvas">
-		{#each Array.from({ length: squareCount * 2 +1 }) as _, yi}
-			{#each Array.from({ length: squareCount * 2 +1 }) as _, xi}
+		{#each Array.from({ length: tileCount }) as _, yi}
+			{#each Array.from({ length: tileCount }) as _, xi}
 				<g
 					transform={`
 		translate(${calculatePosition(xi, yi).x}, ${calculatePosition(xi, yi).y} )

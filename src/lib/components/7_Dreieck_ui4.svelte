@@ -15,26 +15,33 @@
 	let dx = $state(50);
 	let dy = $state(0);
 
+	let tileCount = 50;   
+
+
 	function getStep() {
 		return squareSize + offset;
 	}
 
 	function calculatePosition(xi, yi) {
-		const cx = squareCount;
-		const cy = squareCount;
-		const step = getStep();
+	const step = getStep();
 
-		let x = (xi - cx) * step;
-		let y = (yi - cy) * step;
-		//console.log(xi, x);
+	// center offset
+	const cx = (tileCount - 1) / 2;
+	const cy = (tileCount - 1) / 2;
 
-		// odd rows shift right
-		if (yi % 2 === 1) {
-			x += step;
-		}
+	let x = (xi - cx) * step;
+	let y = (yi - cy) * step;
 
-		return { x, y };
+	// odd rows shift right
+	if (yi % 2 === 1) {
+		x += step;
 	}
+	// shift all left by half step to center pattern
+	x -= step / 2;
+
+	return { x, y };
+}
+
 
 	const getRotation = (xi, yi) => {
 		const posX = xi % 2; // tile in 2×2 cell column (0 or 1)
@@ -62,8 +69,8 @@
 
 <div class="svg-container">
 	<svg viewBox="-500 -500 1000 1000" class="svg-canvas">
-		{#each Array.from({ length: squareCount * 2 +1 }) as _, yi}
-			{#each Array.from({ length: squareCount * 2 +1 }) as _, xi}
+		{#each Array.from({ length: tileCount}) as _, yi}
+			{#each Array.from({ length: tileCount}) as _, xi}
 				<g
 					transform={`
 		translate(${calculatePosition(xi, yi).x}, ${calculatePosition(xi, yi).y} )
