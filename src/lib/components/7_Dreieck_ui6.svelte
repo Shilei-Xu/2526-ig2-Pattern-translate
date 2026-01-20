@@ -10,10 +10,9 @@
 	let offset = $state(0);
 	let squareCount = $state(10);
 	let squareSize = $derived(1000 / squareCount);
-	/* let xm = $state(50);
-	let ym = $state(50);
-	let dx = $state(50);
-	let dy = $state(0); */
+
+
+	let combinedOffset = $derived(offset + squareSize);
 
 	let xm_ratio = $state(0.5); // 0~1
 	let ym_ratio = $state(0.5); // 0~1
@@ -22,7 +21,7 @@
 
 	let tileCount = 50;
 
-	let xm =$derived(xm_ratio * squareSize);
+	let xm = $derived(xm_ratio * squareSize);
 	let ym = $derived(ym_ratio * squareSize);
 	let dx = $derived(dx_ratio * squareSize);
 	let dy = $derived(dy_ratio * squareSize);
@@ -31,24 +30,10 @@
 		return squareSize + offset;
 	}
 
-	function calculatePosition(xi, yi) {
-		const step = getStep();
-
-		// center offset
-		const cx = (tileCount - 1) / 2;
-		const cy = (tileCount - 1) / 2;
-
-		let x = (xi - cx) * step;
-		let y = (yi - cy) * step;
-
-		// odd rows shift right
-		if (yi % 2 === 1) {
-			x += step;
-		}
-		// shift all left by half step to center pattern
-		x -= step / 2;
-
-		return { x, y };
+	function calculatePosition(index, squareCount) {
+		const basePosition = (index - squareCount / 2) * squareSize;
+		const offsetPosition = (index - squareCount / 2 + 0.5) * offset;
+		return basePosition + offsetPosition;
 	}
 
 	const getRotation = (xi, yi) => {
@@ -63,13 +48,14 @@
 </script>
 
 
+
 <div class="svg-container">
 	<svg viewBox="-500 -500 1000 1000" class="svg-canvas">
 		{#each Array.from({ length: tileCount }) as _, yi}
 			{#each Array.from({ length: tileCount }) as _, xi}
 				<g
 					transform={`
-		translate(${calculatePosition(xi, yi).x}, ${calculatePosition(xi, yi).y} )
+		translate(${calculatePosition(xi, tileCount)}, ${calculatePosition(yi, tileCount)})
 		rotate(${getRotation(xi, yi)}, ${squareSize / 2}, ${squareSize / 2})
 	`}
 				>
@@ -99,24 +85,9 @@
 	</svg>
 </div>
 
-<!-- <style>
-	div.sidebar {
-		display: flex;
-		flex-direction: column;
-		list-style: none;
-		padding: 20px;
-		margin: 0 0 1rem 0;
-		gap: 20px;
-		justify-content: flex-start;
-		overflow-y: auto;
-		min-width: 350px;
-	}
-</style>
- -->
 
- <div class="sidebar-right">
-	<!-- <h3 style="margin: 0 0 10px 0; font-size: 1rem; font-weight: 500;">Pattern Controls</h3> -->
-
+<div class="sidebar-right">
+	
 	<Slider min={0} max={250} bind:value={offset} label="Square Offset" />
 	<Slider min={3} max={50} bind:value={squareCount} label="Square Count" />
 

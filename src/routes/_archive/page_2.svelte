@@ -2,8 +2,8 @@
 	import Header from '$lib/components/Header.svelte';
 
 	import { slide } from 'svelte/transition';
-	import Pattern1 from '$lib/components/7_Dreieck_ui5.svelte';
-	import Pattern2 from '$lib/components/7_Dreieck_ui6.svelte';
+	import Pattern1 from '$lib/components/4_Dreieck.svelte';
+	import Pattern2 from '$lib/components/7_Dreieck_ui5.svelte';
 
 	let patterns = [
 		{
