@@ -6,7 +6,7 @@
 	import Toggle from '$lib/ui/Toggle.svelte';
 	import ColorPickerHSV from '$lib/ui/ColorPicker/ColorPickerHSV.svelte';
 	import EditableColorPalette from '$lib/ui/EditableColorPalette.svelte';
-
+	import { appState } from '$lib/appState.svelte.js';
 	let offset = $state(0);
 	let squareCount = $state(10);
 	let squareSize = $derived(1000 / squareCount);
@@ -18,8 +18,8 @@
 
 	let tileCount = 50;
 
-	let xm =$derived(xm_ratio * squareSize);
-	let ym = $derived(ym_ratio * squareSize);
+	let xm =$derived(appState.xm_ratio * squareSize);
+	let ym = $derived(appState.ym_ratio * squareSize);
 	let dx = $derived(dx_ratio * squareSize);
 	let dy = $derived(dy_ratio * squareSize);
 
@@ -124,8 +124,8 @@ function getColor(xi, yi, k) {
 	<Slider min={0} max={250} bind:value={offset} label="Square Offset" />
 	<Slider min={3} max={50} bind:value={squareCount} label="Square Count" />
 
-	<Slider min={0} max={1} step={0.01} bind:value={xm_ratio} label="Center X" />
-	<Slider min={0} max={1} step={0.01} bind:value={ym_ratio} label="Center Y" />
+	<Slider min={0} max={1} step={0.01} bind:value={appState.xm_ratio} label="Center X" />
+	<Slider min={0} max={1} step={0.01} bind:value={appState.ym_ratio} label="Center Y" />
 	<Slider min={0} max={1} step={0.01} bind:value={dx_ratio} label="Distance X" />
 	<Slider min={-0.5} max={0.5} step={0.01} bind:value={dy_ratio} label="Distance Y" />
 </div>
