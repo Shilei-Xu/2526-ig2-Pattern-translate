@@ -10,10 +10,6 @@
 	let offset = $state(0);
 	let squareCount = $state(10);
 	let squareSize = $derived(1000 / squareCount);
-	/* let xm = $state(50);
-	let ym = $state(50);
-	let dx = $state(50);
-	let dy = $state(0); */
 
 	let xm_ratio = $state(0.5); // 0~1
 	let ym_ratio = $state(0.5); // 0~1
@@ -22,10 +18,16 @@
 
 	let tileCount = 50;
 
-	let xm =$derived(xm_ratio * squareSize);
+	let xm = $derived(xm_ratio * squareSize);
 	let ym = $derived(ym_ratio * squareSize);
 	let dx = $derived(dx_ratio * squareSize);
 	let dy = $derived(dy_ratio * squareSize);
+
+	let hue = $state(0);
+
+	function shiftHue(h, s, l) {
+		return `hsl(${(h + hue) % 360}, ${s}%, ${l}%)`;
+	}
 
 	function getStep() {
 		return squareSize + offset;
@@ -62,7 +64,6 @@
 	};
 </script>
 
-
 <div class="svg-container">
 	<svg viewBox="-500 -500 1000 1000" class="svg-canvas">
 		{#each Array.from({ length: tileCount }) as _, yi}
@@ -73,26 +74,26 @@
 		rotate(${getRotation(xi, yi)}, ${squareSize / 2}, ${squareSize / 2})
 	`}
 				>
-					<polygon points="0,0 {dy},{dx} {xm},{ym}" fill="lightblue" />
-					<polygon points="{dy},{dx}  {xm},{ym} 0,{squareSize}" fill="#4281A4" />
+					<polygon points="0,0 {dy},{dx} {xm},{ym}" fill={shiftHue(195, 60, 85)}  />
+					<polygon points="{dy},{dx}  {xm},{ym} 0,{squareSize}" fill={shiftHue(195, 60, 85)}  />
 					<polygon
 						points="{xm},{ym} 0,{squareSize} {squareSize - dx},{dy + squareSize}"
-						fill="lightblue"
+						fill={shiftHue(195, 60, 85)}
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},{squareSize} {squareSize - dx},{dy + squareSize}"
-						fill="#4281A4"
+						fill={shiftHue(202, 50, 35)}
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},{squareSize} {squareSize - dy},{squareSize - dx}"
-						fill="lightblue"
+						fill={shiftHue(195, 60, 85)}
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},0 {squareSize - dy},{squareSize - dx}"
-						fill="#4281A4"
+						fill={shiftHue(195, 60, 85)}
 					/>
-					<polygon points="{xm},{ym} {squareSize},0 {dx},{-dy}" fill="lightblue" />
-					<polygon points="{xm},{ym} 0,0 {dx},{-dy}" fill="salmon" />
+					<polygon points="{xm},{ym} {squareSize},0 {dx},{-dy}" fill={shiftHue(195, 60, 85)} />
+					<polygon points="{xm},{ym} 0,0 {dx},{-dy}" fill="tomato" />
 				</g>
 			{/each}
 		{/each}
@@ -114,7 +115,7 @@
 </style>
  -->
 
- <div class="sidebar-right">
+<div class="sidebar-right">
 	<!-- <h3 style="margin: 0 0 10px 0; font-size: 1rem; font-weight: 500;">Pattern Controls</h3> -->
 
 	<Slider min={0} max={250} bind:value={offset} label="Square Offset" />
@@ -130,4 +131,5 @@
 	<Slider min={0} max={1} step={0.01} bind:value={ym_ratio} label="Center Y" />
 	<Slider min={0} max={1} step={0.01} bind:value={dx_ratio} label="Distance X" />
 	<Slider min={-0.5} max={0.5} step={0.01} bind:value={dy_ratio} label="Distance Y" />
+	<Slider min={0} max={360} step={1} bind:value={hue} label="Hue" />
 </div>

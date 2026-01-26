@@ -57,28 +57,26 @@
 		if (posY === 1 && posX === 1) return 270; // bottom right + 270°
 	};
 
-	const baseColors = ['#2C2F4A', '#4A6FA5', '#A7C6DA', '#EAEAEA'];
+	const baseColors = [
+  '#1B264F', // 最深
+  '#2C3E91',
+  '#3E5C9A',
+  '#4A6FA5',
+  '#6C8DC7',
+  '#88A4D0',
+  '#A7C6DA',
+  '#DCE3F2'  // 最浅
+];
 
-	function pseudoRandom(seed) {
-		return (Math.sin(seed * 12.9898) * 43758.5453) % 1;
-	}
 
-	function jitter(hex, amount, seed) {
-		const r = parseInt(hex.slice(1, 3), 16);
-		const g = parseInt(hex.slice(3, 5), 16);
-		const b = parseInt(hex.slice(5, 7), 16);
+function getColor(xi, yi, k) {
 
-		const d = (pseudoRandom(seed) * 2 - 1) * amount;
-		const clamp = (v) => Math.max(0, Math.min(255, v));
+  const index = (xi + yi * 4 + k) % baseColors.length;
+  return baseColors[index];
+}
 
-		return `rgb(${clamp(r + d)}, ${clamp(g + d)}, ${clamp(b + d)})`;
-	}
 
-	function getColor(xi, yi, k) {
-		const base = baseColors[(xi * yi + k) % baseColors.length];
-		const seed = xi * 100 + yi * 10 + k;
-		return jitter(base, 6, seed);
-	}
+
 </script>
 
 

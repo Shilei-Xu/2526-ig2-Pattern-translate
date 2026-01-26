@@ -82,24 +82,6 @@
 </script>
 
 
-<div class="sidebar">
-	<h3 style="margin: 0 0 10px 0; font-size: 1rem; font-weight: 500;">Pattern Controls</h3>
-
-	<Slider min={0} max={250} bind:value={offset} label="Square Offset" />
-	<Slider min={3} max={50} bind:value={squareCount} label="Square Count" />
-
-	<!-- <Slider min={dy} max={squareSize - dy} step={1} bind:value={xm} label="Center X" />
-	<Slider min={-dy} max={squareSize + dy} step={1} bind:value={ym} label="Center Y" />
-
-	<Slider min={0} max={squareSize} step={1} bind:value={dx} label="Distance X" />
-	<Slider min={-squareSize} max={squareSize} step={1} bind:value={dy} label="Distance Y" /> -->
-
-	<Slider min={0} max={1} step={0.01} bind:value={xm_ratio} label="Center X" />
-	<Slider min={0} max={1} step={0.01} bind:value={ym_ratio} label="Center Y" />
-	<Slider min={0} max={1} step={0.01} bind:value={dx_ratio} label="Distance X" />
-	<Slider min={-0.5} max={0.5} step={0.01} bind:value={dy_ratio} label="Distance Y" />
-</div>
-
 <div class="svg-container">
 	<svg viewBox="-500 -500 1000 1000" class="svg-canvas">
 		{#each Array.from({ length: tileCount }) as _, yi}
@@ -136,16 +118,14 @@
 	</svg>
 </div>
 
-<style>
-	div.sidebar {
-		display: flex;
-		flex-direction: column;
-		list-style: none;
-		padding: 20px;
-		margin: 0 0 1rem 0;
-		gap: 20px;
-		justify-content: flex-start;
-		overflow-y: auto;
-		min-width: 350px;
-	}
-</style>
+<div class="sidebar-right">
+	<h3 style="margin: 0 0 10px 0; font-size: 1rem; font-weight: 500;">Pattern Controls</h3>
+
+	<Slider min={0} max={250} bind:value={offset} label="Square Offset" />
+	<Slider min={3} max={47} bind:value={squareCount} label="Square Count" />
+
+	<Slider min={0} max={1} step={0.01} bind:value={xm_ratio} label="Center X" />
+	<Slider min={0} max={1} step={0.01} bind:value={ym_ratio} label="Center Y" />
+	<Slider min={0} max={1} step={0.01} bind:value={dx_ratio} label="Distance X" />
+	<Slider min={-0.5} max={0.5} step={0.01} bind:value={dy_ratio} label="Distance Y" />
+</div>

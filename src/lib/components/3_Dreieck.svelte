@@ -56,15 +56,7 @@
 		{#each Array.from({ length: squareCount }) as _, yi}
 			{#each Array.from({ length: squareCount }) as _, xi}
 				<g transform="translate({calculatePosition(xi, yi).x}, {calculatePosition(xi, yi).y})">
-					<!-- <g transform="translate({squareSize},0) rotate(90)">
-						<rect width={squareSize} height={squareSize / 2} fill="tomato" />
-						<rect
-							transform="translate(0, {squareSize / 2})"
-							width={squareSize}
-							height={squareSize / 2}
-							fill="lightgrey"
-						/>
-					</g> -->
+			
 					<polygon
 						points="0,0 0,{squareSize} {halfSize - Distance_X},{halfSize - Distance_Y}"
 						fill={`hsl(${hue}, 50%, 50%)`}
