@@ -14,7 +14,7 @@
 	//05-优化风车
 	import Pattern5 from '$lib/components/8_Dreieck_ui.svelte';
 	//06-双风车
-	import Pattern6 from '$lib/components/7_Dreieck_ui5.svelte';
+	import Pattern6 from '$lib/components/7_Dreieck_ui6.svelte';
 	//07-随机蓝色
 	import Pattern7 from '$lib/components/7_Dreieck_ui8_1.svelte';
 	//import Pattern7 from '$lib/components/7_Dreieck_ui8.svelte';

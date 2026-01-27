@@ -11,9 +11,6 @@
 	let squareCount = $state(10);
 	let squareSize = $derived(1000 / squareCount);
 
-
-	let combinedOffset = $derived(offset + squareSize);
-
 	let xm_ratio = $state(0.5); // 0~1
 	let ym_ratio = $state(0.5); // 0~1
 	let dx_ratio = $state(0.5); // 0~1
@@ -30,10 +27,30 @@
 		return squareSize + offset;
 	}
 
-	function calculatePosition(index, squareCount) {
-		const basePosition = (index - squareCount / 2) * squareSize;
-		const offsetPosition = (index - squareCount / 2 + 0.5) * offset;
+	function calculatePositionMiddle(index, count) {
+		const basePosition = (index - count / 2) * squareSize;
+		const offsetPosition = (index - count / 2 + 0.5) * offset;
 		return basePosition + offsetPosition;
+	}
+
+	function calculatePosition(xi, yi) {
+		const step = getStep();
+
+		// center offset
+		const cx = (tileCount - 1) / 2;
+		const cy = (tileCount - 1) / 2;
+
+		let x = calculatePositionMiddle(xi, tileCount);
+		let y = calculatePositionMiddle(yi, tileCount);
+
+		// // odd rows shift right
+		if (yi % 2 === 1) {
+			x += step;
+		}
+		// shift all left by half step to center pattern
+		x -= step / 2;
+
+		return { x, y };
 	}
 
 	const getRotation = (xi, yi) => {
@@ -47,15 +64,13 @@
 	};
 </script>
 
-
-
 <div class="svg-container">
 	<svg viewBox="-500 -500 1000 1000" class="svg-canvas">
 		{#each Array.from({ length: tileCount }) as _, yi}
 			{#each Array.from({ length: tileCount }) as _, xi}
 				<g
 					transform={`
-		translate(${calculatePosition(xi, tileCount)}, ${calculatePosition(yi, tileCount)})
+		translate(${calculatePosition(xi, yi).x}, ${calculatePosition(xi, yi).y} )
 		rotate(${getRotation(xi, yi)}, ${squareSize / 2}, ${squareSize / 2})
 	`}
 				>
@@ -85,18 +100,11 @@
 	</svg>
 </div>
 
-
 <div class="sidebar-right">
-	
+	<h3 style="margin: 0 0 10px 0; font-size: 1rem; font-weight: 500;">Pattern Controls</h3>
+
 	<Slider min={0} max={250} bind:value={offset} label="Square Offset" />
 	<Slider min={3} max={50} bind:value={squareCount} label="Square Count" />
-
-	<!-- <Slider min={dy} max={squareSize - dy} step={1} bind:value={xm} label="Center X" />
-	<Slider min={-dy} max={squareSize + dy} step={1} bind:value={ym} label="Center Y" />
-
-	<Slider min={0} max={squareSize} step={1} bind:value={dx} label="Distance X" />
-	<Slider min={-squareSize} max={squareSize} step={1} bind:value={dy} label="Distance Y" /> -->
-
 	<Slider min={0} max={1} step={0.01} bind:value={xm_ratio} label="Center X" />
 	<Slider min={0} max={1} step={0.01} bind:value={ym_ratio} label="Center Y" />
 	<Slider min={0} max={1} step={0.01} bind:value={dx_ratio} label="Distance X" />
