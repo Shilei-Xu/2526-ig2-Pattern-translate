@@ -6,7 +6,7 @@
 	import Toggle from '$lib/ui/Toggle.svelte';
 	import ColorPickerHSV from '$lib/ui/ColorPicker/ColorPickerHSV.svelte';
 	import EditableColorPalette from '$lib/ui/EditableColorPalette.svelte';
-	import { appState } from '$lib/appState.svelte.js';
+	
 
 	let offset = $state(0);
 	let squareCount = $state(10);
@@ -19,8 +19,8 @@
 
 	let tileCount = 50;
 
-	let xm = $derived(appState.xm_ratio * squareSize);
-	let ym = $derived(appState.ym_ratio * squareSize);
+	let xm = $derived(xm_ratio * squareSize);
+	let ym = $derived(ym_ratio * squareSize);
 	let dx = $derived(dx_ratio * squareSize);
 	let dy = $derived(dy_ratio * squareSize);
 

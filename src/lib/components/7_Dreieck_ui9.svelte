@@ -6,7 +6,8 @@
 	import Toggle from '$lib/ui/Toggle.svelte';
 	import ColorPickerHSV from '$lib/ui/ColorPicker/ColorPickerHSV.svelte';
 	import EditableColorPalette from '$lib/ui/EditableColorPalette.svelte';
-
+	
+	
 	let offset = $state(0);
 	let squareCount = $state(10);
 	let squareSize = $derived(1000 / squareCount);
@@ -18,7 +19,7 @@
 
 	let tileCount = 50;
 
-	let xm =$derived(xm_ratio * squareSize);
+	let xm = $derived(xm_ratio * squareSize);
 	let ym = $derived(ym_ratio * squareSize);
 	let dx = $derived(dx_ratio * squareSize);
 	let dy = $derived(dy_ratio * squareSize);
@@ -80,7 +81,6 @@
 		return jitter(base, 6, seed);
 	}
 </script>
-
 
 <div class="svg-container">
 	<svg viewBox="-500 -500 1000 1000" class="svg-canvas">

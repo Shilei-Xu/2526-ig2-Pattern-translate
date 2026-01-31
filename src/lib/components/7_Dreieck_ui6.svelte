@@ -6,7 +6,8 @@
 	import Toggle from '$lib/ui/Toggle.svelte';
 	import ColorPickerHSV from '$lib/ui/ColorPicker/ColorPickerHSV.svelte';
 	import EditableColorPalette from '$lib/ui/EditableColorPalette.svelte';
-
+	
+	
 	let offset = $state(0);
 	let squareCount = $state(10);
 	let squareSize = $derived(1000 / squareCount);

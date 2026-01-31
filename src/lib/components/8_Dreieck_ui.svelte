@@ -7,6 +7,7 @@
 	import ColorPickerHSV from '$lib/ui/ColorPicker/ColorPickerHSV.svelte';
 	import EditableColorPalette from '$lib/ui/EditableColorPalette.svelte';
 
+
 	let offset = $state(0);
 	let squareCount = $state(10);
 	let squareSize = $derived(1000 / squareCount);
@@ -27,7 +28,6 @@
 	function shiftHue(h, s, l) {
 		return `hsl(${(h + hue) % 360}, ${s}%, ${l}%)`;
 	}
-
 
 	function getStep() {
 		return squareSize + offset;
@@ -62,8 +62,6 @@
 		if (posY === 1 && posX === 0) return 180; // bottom left + 180°
 		if (posY === 1 && posX === 1) return 270; // bottom right + 270°
 	};
-
-
 </script>
 
 <div class="svg-container">
@@ -88,11 +86,11 @@
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},{squareSize} {squareSize - dy},{squareSize - dx}"
-						fill={shiftHue(195, 60, 85)} 
+						fill={shiftHue(195, 60, 85)}
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},0 {squareSize - dy},{squareSize - dx}"
-						fill={shiftHue(195, 60, 85)} 
+						fill={shiftHue(195, 60, 85)}
 					/>
 					<polygon points="{xm},{ym} {squareSize},0 {dx},{-dy}" fill={shiftHue(195, 60, 85)} />
 					<polygon points="{xm},{ym} 0,0 {dx},{-dy}" fill="tomato" />
