@@ -40,7 +40,7 @@
     "
 				>
 					<polygon points="0,0 0,{ySize} {xm},{ym}" fill="tomato" />
-					<polygon points="{xSize},0 {xSize},{ySize} {xm},{ym}" fill={shiftHue(195, 60, 85)} />
+					<polygon points="{xSize},0 {xSize},{ySize} {xm},{ym}" fill={shiftHue(60, 100, 94)} />
 					<polygon points="0,0 {xSize},0 {xm},{ym}" fill={shiftHue(202, 50, 35)} />
 					<polygon points="0,{ySize} {xSize},{ySize} {xm},{ym}" fill="tomato" />
 				</g>
@@ -50,6 +50,8 @@
 </div>
 
 <div class="sidebar-right">
+	<h3 style="margin: 0 0 10px 0; font-size: 1rem; font-weight: 500;">Pattern Controls</h3>
+
 	<Slider min={0} max={200} bind:value={offset} label="Offset" />
 
 	<Slider min={5} max={50} bind:value={xCount} label="Count X" />

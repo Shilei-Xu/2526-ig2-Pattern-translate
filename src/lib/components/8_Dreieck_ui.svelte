@@ -74,7 +74,7 @@
 		rotate(${getRotation(xi, yi)}, ${squareSize / 2}, ${squareSize / 2})
 	`}
 				>
-					<polygon points="0,0 {dy},{dx} {xm},{ym}" fill={shiftHue(202, 50, 35)} />
+					<polygon points="0,0 {dy},{dx} {xm},{ym}" fill="tomato" />
 					<polygon points="{dy},{dx}  {xm},{ym} 0,{squareSize}" fill={shiftHue(202, 50, 35)} />
 					<polygon
 						points="{xm},{ym} 0,{squareSize} {squareSize - dx},{dy + squareSize}"
@@ -82,11 +82,11 @@
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},{squareSize} {squareSize - dx},{dy + squareSize}"
-						fill={shiftHue(202, 50, 35)}
+						fill={shiftHue(60, 100, 94)}
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},{squareSize} {squareSize - dy},{squareSize - dx}"
-						fill={shiftHue(195, 60, 85)}
+						fill={shiftHue(60, 100, 94)}
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},0 {squareSize - dy},{squareSize - dx}"

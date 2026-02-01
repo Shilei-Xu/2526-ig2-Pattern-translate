@@ -75,26 +75,26 @@
 		rotate(${getRotation(xi, yi)}, ${squareSize / 2}, ${squareSize / 2})
 	`}
 				>
-					<polygon points="0,0 {dy},{dx} {xm},{ym}" fill="lightblue" />
-					<polygon points="{dy},{dx}  {xm},{ym} 0,{squareSize}" fill="#4281A4" />
+					<polygon points="0,0 {dy},{dx} {xm},{ym}" fill='hsl(195, 53%, 79%)' />
+					<polygon points="{dy},{dx}  {xm},{ym} 0,{squareSize}" fill='hsl(202, 50%, 35%)' />
 					<polygon
 						points="{xm},{ym} 0,{squareSize} {squareSize - dx},{dy + squareSize}"
-						fill="lightblue"
+						fill='hsl(60, 100%, 94%)'
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},{squareSize} {squareSize - dx},{dy + squareSize}"
-						fill="#4281A4"
+						fill='hsl(202, 50%, 35%)'
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},{squareSize} {squareSize - dy},{squareSize - dx}"
-						fill="lightblue"
+						fill='hsl(60, 100%, 94%)'
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},0 {squareSize - dy},{squareSize - dx}"
-						fill="#4281A4"
+						fill='hsl(202, 50%, 35%)'
 					/>
-					<polygon points="{xm},{ym} {squareSize},0 {dx},{-dy}" fill="lightblue" />
-					<polygon points="{xm},{ym} 0,0 {dx},{-dy}" fill="salmon" />
+					<polygon points="{xm},{ym} {squareSize},0 {dx},{-dy}" fill='hsl(195, 53%, 79%)' />
+					<polygon points="{xm},{ym} 0,0 {dx},{-dy}" fill='hsl(60, 100%, 94%)' />
 				</g>
 			{/each}
 		{/each}

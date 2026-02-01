@@ -40,7 +40,7 @@
 					<polygon
 						points="{squareSize},0 {squareSize},{squareSize} {halfSize - Distance_X},{halfSize -
 							Distance_Y}"
-						fill={shiftHue(195, 60, 85)}
+						fill={shiftHue(60, 100, 94)}
 					/>
 					<polygon
 						points="0,0 {squareSize},0 {halfSize - Distance_X},{halfSize - Distance_Y}"
@@ -58,7 +58,8 @@
 </div>
 
 <div class="sidebar-right">
-	
+	<h3 style="margin: 0 0 10px 0; font-size: 1rem; font-weight: 500;">Pattern Controls</h3>
+
 
 	<Slider min={0} max={200} bind:value={offset} label="Offset" />
 

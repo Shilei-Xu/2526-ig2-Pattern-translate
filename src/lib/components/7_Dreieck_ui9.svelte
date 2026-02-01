@@ -6,8 +6,7 @@
 	import Toggle from '$lib/ui/Toggle.svelte';
 	import ColorPickerHSV from '$lib/ui/ColorPicker/ColorPickerHSV.svelte';
 	import EditableColorPalette from '$lib/ui/EditableColorPalette.svelte';
-	
-	
+
 	let offset = $state(0);
 	let squareCount = $state(10);
 	let squareSize = $derived(1000 / squareCount);
@@ -58,22 +57,29 @@
 		if (posY === 1 && posX === 1) return 270; // bottom right + 270°
 	};
 
-	const baseColors = ['#FF6347', '#4A6FA5', '#FFFFE0', '#ADD8E6'];
+	//const baseColors = ['#FF6347', '#4A6FA5', '#FFFFE0', '#ADD8E6'];
+
+	const baseColors = [
+		'hsl(202, 50%, 35%)', // 深蓝
+		'hsl(9, 100%, 64%)', // 番茄
+		'hsl(195, 53%, 79%)', // #A7C6DA  浅雾蓝 / 粉蓝灰
+		'hsl(60, 100%, 94%)' // 黄
+	];
 
 	function pseudoRandom(seed) {
 		return (Math.sin(seed * 12.9898) * 43758.5453) % 1;
 	}
 
-	function jitter(hex, amount, seed) {
-		const r = parseInt(hex.slice(1, 3), 16);
-		const g = parseInt(hex.slice(3, 5), 16);
-		const b = parseInt(hex.slice(5, 7), 16);
+	function jitter(color, amount, seed) {
+	const rand = (Math.sin(seed * 12.9898) * 43758.5453) % 1;
+	const delta = (rand * 2 - 1) * amount * 0.01; // 转成小数
 
-		const d = (pseudoRandom(seed) * 2 - 1) * amount;
-		const clamp = (v) => Math.max(0, Math.min(255, v));
+	return chroma(color)
+		.brighten(delta * 5)   // 轻微亮度变化
+		.saturate(delta * 2)   // 轻微饱和度变化
+		.hex();
+}
 
-		return `rgb(${clamp(r + d)}, ${clamp(g + d)}, ${clamp(b + d)})`;
-	}
 
 	function getColor(xi, yi, k) {
 		const base = baseColors[(xi * yi + k) % baseColors.length];

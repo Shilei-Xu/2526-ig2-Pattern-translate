@@ -11,56 +11,58 @@
 	import Pattern3 from '$lib/components/5_Dreieck3.svelte';
 	//04-边框（纯色，随机版本）
 	import Pattern4 from '$lib/components/8_Dreieck_ui2.svelte';
-	//05-优化风车
+	//05-彩色方块
 	import Pattern5 from '$lib/components/8_Dreieck_ui.svelte';
-	//06-双风车
+	//06-三角风车
 	import Pattern6 from '$lib/components/7_Dreieck_ui6.svelte';
-	//07-随机蓝色
-	import Pattern7 from '$lib/components/7_Dreieck_ui8_1.svelte';
+	//08-主色调三角形 有一些微小随机
+	//import Pattern7 from '$lib/components/7_Dreieck_ui8_1.svelte';
+	import Pattern8 from '$lib/components/7_Dreieck_ui8_2.svelte';
+
 	//import Pattern7 from '$lib/components/7_Dreieck_ui8.svelte';
-	//08-随机4色
-	import Pattern8 from '$lib/components/7_Dreieck_ui9.svelte';
+	//07-同色系
+	import Pattern7 from '$lib/components/7_Dreieck_ui9.svelte';
 
 	let patterns = [
 		{
-			name: '01 - Squares in the Grid (offset)',
+			name: '01 - Ribbon Triangles (Center Motion)',
 			component: Pattern1,
-			description: 'A grid of squares divided into two triangles that can get an offset.'
+			description: 'Four triangles form a ribbon-like pattern, animated by moving their center points.'
 		},
 		{
-			name: '02 - Squares in the Grid (offset and size)',
+			name: '02 - Ribbon Triangles (Mirrored)',
 			component: Pattern2,
-			description: 'A grid of squares divided into two triangles that can get an offset and size.'
+			description: 'A ribbon-style triangle pattern with mirrored symmetry.'
 		},
 		{
-			name: '03 - Squares in the Grid (offset and size)',
+			name: '03 - Ribbon Triangles (Mirror + Color Shift)',
 			component: Pattern3,
-			description: 'A grid of squares divided into two triangles that can get an offset and size.'
+			description: 'A mirrored ribbon triangle pattern with dynamic color variations.'
 		},
 		{
-			name: '04 - Triangle Pattern with Mirroring',
+			name: '04 - Solid Border Triangles (Random Colors)',
 			component: Pattern4,
-			description: 'A triangle pattern that incorporates mirroring effects.'
+			description: 'A border-style triangle layout using solid fills with randomized color schemes.'
 		},
 		{
-			name: '05 - Two Colors with Accent',
+			name: '05 - Colorful Squares',
 			component: Pattern5,
-			description: 'A triangle pattern using two main colors and one accent color.'
+			description: 'Squares filled with vibrant colors, forming a lively mosaic pattern.'
 		},
 		{
-			name: '06 - Complex Triangle Pattern',
+			name: '06 - Triangle Windmill',
 			component: Pattern6,
-			description: 'A more complex triangle pattern with additional controls.'
+			description: 'Triangles arranged like a spinning windmill, creating a dynamic rotational effect.'
 		},
 		{
-			name: '07 - Advanced Triangle Pattern',
+			name: '07 - Primary Hue Triangles (with Randomness)',
 			component: Pattern7,
-			description: 'An advanced triangle pattern with enhanced features.'
+			description: 'Triangles based on a primary color hue, with slight randomness to add organic variation.'
 		},
 		{
-			name: '08 - Dynamic Triangle Pattern',
+			name: '08 - Monochrome Triangles',
 			component: Pattern8,
-			description: 'A dynamic triangle pattern with multiple adjustable parameters.'
+			description: 'Triangles using a single color palette with subtle variations for a harmonious look.'
 		}
 	];
 

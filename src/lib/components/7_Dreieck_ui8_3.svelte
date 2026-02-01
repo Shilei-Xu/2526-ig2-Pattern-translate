@@ -7,6 +7,7 @@
 	import ColorPickerHSV from '$lib/ui/ColorPicker/ColorPickerHSV.svelte';
 	import EditableColorPalette from '$lib/ui/EditableColorPalette.svelte';
 
+
 	let offset = $state(0);
 	let squareCount = $state(10);
 	let squareSize = $derived(1000 / squareCount);
@@ -18,16 +19,10 @@
 
 	let tileCount = 50;
 
-	let xm = $derived(xm_ratio * squareSize);
+	let xm =$derived(xm_ratio * squareSize);
 	let ym = $derived(ym_ratio * squareSize);
 	let dx = $derived(dx_ratio * squareSize);
 	let dy = $derived(dy_ratio * squareSize);
-
-	let hue = $state(0);
-
-	function shiftHue(h, s, l) {
-		return `hsl(${(h + hue) % 360}, ${s}%, ${l}%)`;
-	}
 
 	function getStep() {
 		return squareSize + offset;
@@ -63,18 +58,24 @@
 		if (posY === 1 && posX === 1) return 270; // bottom right + 270°
 	};
 
-	//const baseColors = ['#2C2F4A', '#4A6FA5', '#A7C6DA', '#EAEAEA'];
-
 	const baseColors = [
-		'hsl(202, 50%, 35%)', // 深蓝
-		'hsl(9, 100%, 64%)', // 番茄
-		'hsl(195, 53%, 79%)', // #A7C6DA  浅雾蓝 / 粉蓝灰
-		'hsl(60, 100%, 94%)' // 黄
-	];
+  '#2C2F4A', // 最深
+  '#2C3E91',
+  '#3E5C9A',
+  '#4A6FA5',
+  '#6C8DC7',
+  '#88A4D0',
+  '#A7C6DA',
+  '#DCE3F2'  // 最浅
+];
 
-	function getColor(xi, yi, k) {
-		return baseColors[((xi % 2) * 2 + (yi % 2)) % baseColors.length];
-	}
+
+function getColor(xi, yi, k) {
+
+  const index = (xi + yi * 4 + k) % baseColors.length;
+  return baseColors[index];
+}
+
 </script>
 
 <div class="svg-container">
@@ -88,37 +89,40 @@
 	`}
 				>
 					<polygon points="0,0 {dy},{dx} {xm},{ym}" fill={getColor(xi, yi, 0)} />
-					<polygon points="{dy},{dx}  {xm},{ym} 0,{squareSize}" fill={getColor(xi, yi, 0)} />
+					<polygon points="{dy},{dx}  {xm},{ym} 0,{squareSize}" fill={getColor(xi, yi, 1)} />
 					<polygon
 						points="{xm},{ym} 0,{squareSize} {squareSize - dx},{dy + squareSize}"
-						fill={getColor(xi, yi, 0)}
+						fill={getColor(xi, yi, 2)}
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},{squareSize} {squareSize - dx},{dy + squareSize}"
-						fill={getColor(xi, yi, 0)}
+						fill={getColor(xi, yi, 3)}
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},{squareSize} {squareSize - dy},{squareSize - dx}"
-						fill={getColor(xi, yi, 0)}
+						fill={getColor(xi, yi, 4)}
 					/>
 					<polygon
 						points="{xm},{ym} {squareSize},0 {squareSize - dy},{squareSize - dx}"
-						fill={getColor(xi, yi, 0)}
+						fill={getColor(xi, yi, 5)}
 					/>
-					<polygon points="{xm},{ym} {squareSize},0 {dx},{-dy}" fill={getColor(xi, yi, 0)} />
-					<polygon points="{xm},{ym} 0,0 {dx},{-dy}" fill={getColor(xi, yi, 0)} />
+					<polygon points="{xm},{ym} {squareSize},0 {dx},{-dy}" fill={getColor(xi, yi, 6)} />
+					<polygon points="{xm},{ym} 0,0 {dx},{-dy}" fill={getColor(xi, yi, 7)} />
 				</g>
 			{/each}
 		{/each}
 	</svg>
 </div>
 
+
 <div class="sidebar-right">
 	<h3 style="margin: 0 0 10px 0; font-size: 1rem; font-weight: 500;">Pattern Controls</h3>
 
 	<Slider min={0} max={250} bind:value={offset} label="Square Offset" />
 	<Slider min={3} max={50} bind:value={squareCount} label="Square Count" />
-	<Slider min={-0.5} max={0.5} step={0.01} bind:value={dy_ratio} label="Distance Y" />
+
+	<Slider min={0} max={1} step={0.01} bind:value={xm_ratio} label="Center X" />
+	<Slider min={0} max={1} step={0.01} bind:value={ym_ratio} label="Center Y" />
 	<Slider min={0} max={1} step={0.01} bind:value={dx_ratio} label="Distance X" />
-	<Slider min={0} max={360} step={1} bind:value={hue} label="Hue" />
+	<Slider min={-0.5} max={0.5} step={0.01} bind:value={dy_ratio} label="Distance Y" />
 </div>
